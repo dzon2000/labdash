@@ -1,0 +1,2 @@
+# labdash
+Homelab Dashboard
