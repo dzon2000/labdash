@@ -1,5 +1,19 @@
 # Notes to remember
 
+## React
+
+### Components
+
+Components are just JavaScript functions returning JSX. Make sure to use capitalized names to differentiate components from regular JavaScript functions. Also, the components must be invoked using JSX syntax.
+
+```javascript
+function Header() {
+  return <h1>Hello!</h1>
+}
+
+root.render(<Header />)
+````
+
 ## JSX
 
 Three rules of JSX: [here](https://react.dev/learn/writing-markup-with-jsx#the-rules-of-jsx)
