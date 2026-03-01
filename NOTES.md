@@ -24,6 +24,12 @@ functtion Header({title}) { // Extracts title from props object
 }
 ````
 
+### States
+
+States rely on hooks and are able to update the element data.
+
+> **Note:** Unlike props which are passed to components as the first function parameter, the state is initiated and stored within a component. You can pass the state information to children components as props, but the logic for updating the state should be kept within the component where state was initially created.
+
 ## JSX
 
 Three rules of JSX: [here](https://react.dev/learn/writing-markup-with-jsx#the-rules-of-jsx)

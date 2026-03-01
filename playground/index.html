@@ -13,6 +13,12 @@
             }
 
             function HomePage() {
+                const [likes, setLikes] = React.useState(0); // First element is the value, second is the function to update the value. Initial value can be set providing argument to useState.
+
+                function handleClick() {
+                    setLikes(likes + 1);
+                }
+
                 const names = [
                     "Ada Lovelace",
                     "Grace Hopper",
@@ -27,6 +33,7 @@
                             <li key={name}>{name}</li>
                           ))}
                         </ul>
+                        <button onClick={handleClick}>Like ({likes})</button>
                     </div>
                 );
             }
