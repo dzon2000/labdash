@@ -41,3 +41,23 @@ Three rules of JSX: [here](https://react.dev/learn/writing-markup-with-jsx#the-r
 ## Babel
 
 JavaScript compiler to transform e.g. JSX code into regular JavaScript.
+
+## Next.js
+
+Next.js by default uses React's Server Components to boost performance. In order to use states or events we need to declare Client Component explicitly.
+
+```javascript
+'use client'; // Use this directive
+
+import { useState } from 'react';
+
+export default function LikeButton() {
+    const [likes, setLikes] = useState(0);
+
+    function handleClick() {
+        setLikes(likes + 1);
+    }
+
+    return <button onClick={handleClick}>Like ({likes})</button>;
+}
+```
