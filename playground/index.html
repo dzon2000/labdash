@@ -7,14 +7,16 @@
     <script type="text/jsx">
       const app = document.getElementById('app');
 
-      function Header() {
-        return <h1>Develop. Preview. Ship.</h1>;
+      function Header({ title }) {
+        console.log(title);
+        return <h1>{title ? title : 'Default title'}</h1>;
       }
 
       function HomePage() {
         return (
           <div>
             {/* Nesting the Header component */}
+            <Header title="React"/>
             <Header />
           </div>
         );
