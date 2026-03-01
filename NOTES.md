@@ -61,3 +61,17 @@ export default function LikeButton() {
     return <button onClick={handleClick}>Like ({likes})</button>;
 }
 ```
+
+### Layouts
+
+he key property: layouts don't re-mount on navigation. When a user clicks between pages, the layout stays alive and only the `{children}` slot swaps out.
+
+This makes layouts the right place for persistent UI — a sidebar, a top nav bar, a theme wrapper.
+
+Docs: [Layouts](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates)
+
+**Links**
+
+`<Link>` is a React component that extends the HTML `<a>` element to provide prefetching and client-side navigation between routes.
+
+[Links](https://nextjs.org/docs/app/api-reference/components/link)
