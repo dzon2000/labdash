@@ -1,31 +1,83 @@
-import ServiceCard from "./components/ServiceCard";
+import ServicesList from "./components/ServicesList";
 
 const services = [
-  { icon: 'shield-minus', name: 'Pi-hole', href: '/pihole', description: 'DNS ad-blocking', status: 'online' },
-  { icon: 'waypoints', name: 'Nginx', href: '/nginx', description: 'Reverse proxy', status: 'online' },
-  { icon: 'download', name: 'Transmission', href: '/transmission', description: 'BitTorrent Client', status: 'warning' },
-  { icon: 'code', name: 'Code Server', href: '/code', description: 'VS Code remote server', status: 'down' },
+    {
+        icon: "shield-minus",
+        name: "Pi-hole",
+        href: "/pihole",
+        description: "DNS ad-blocking",
+        statusEndpoint: "/api/pihole/status",
+    },
+    {
+        icon: "waypoints",
+        name: "Nginx",
+        href: "/nginx",
+        description: "Reverse proxy",
+        statusEndpoint: "/api/nginx/status",
+    },
+    {
+        icon: "download",
+        name: "Transmission",
+        href: "/transmission",
+        description: "BitTorrent Client",
+        statusEndpoint: "/api/transmission/status",
+    },
+    {
+        icon: "code",
+        name: "Code Server",
+        href: "/code",
+        description: "VS Code remote server",
+        statusEndpoint: "/api/code/status",
+    },
 ];
 
-export default function HomePage() {
-  return (
-    <main className="flex-1 p-8">
-          {/* Header Section */}
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-white mb-2">
-              Destroyer Dashboard
-            </h1>
-            <p className="text-gray-400">
-              Happily monitoring { services.length } services.
-            </p>
-          </div>
+async function getInitialStatuses() {
+    const servicesWithStatus = await Promise.all(
+        services.map(async (service) => {
+            try {
+                const response = await fetch(
+                    `http://localhost:3000${service.statusEndpoint}`,
+                    {
+                        cache: "no-store",
+                        signal: AbortSignal.timeout(5000),
+                    },
+                );
 
-          {/* Services Grid */}
-          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service) => (
-              <ServiceCard key={service.name} service={service} />
-            ))}
-          </section>
+                if (!response.ok) {
+                    return {
+                        ...service,
+                        status: "down",
+                        message: "Unreachable",
+                    };
+                }
+
+                const data = await response.json();
+                return { ...service, ...data };
+            } catch (error) {
+                return { ...service, status: "down", message: "Unreachable" };
+            }
+        }),
+    );
+
+    return servicesWithStatus;
+}
+
+export default async function HomePage() {
+    const initialServices = await getInitialStatuses();
+
+    return (
+        <main className="flex-1 p-8">
+            {/* Header Section */}
+            <div className="mb-8">
+                <h1 className="text-4xl font-bold text-white mb-2">
+                    Destroyer Dashboard
+                </h1>
+                <p className="text-gray-400">
+                    Happily monitoring {services.length} services.
+                </p>
+            </div>
+
+            <ServicesList initialServices={initialServices} />
         </main>
-  );
+    );
 }
