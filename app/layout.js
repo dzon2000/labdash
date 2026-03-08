@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
         <html lang="en">
             <body className="flex bg-gray-900 min-h-screen">
                 <nav className="w-48 p-4 flex flex-col gap-2">
-                    <Link href="/pihole">Pi-hole</Link>
+                    <Link href="/pihole" className="text-gray-300 hover:text-white">Pi-hole</Link>
                 </nav>
                 {children}
             </body>
