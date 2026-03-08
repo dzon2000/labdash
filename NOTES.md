@@ -62,6 +62,8 @@ export default function LikeButton() {
 }
 ```
 
+It's quite nice to have hybrid components, the server side for initial data and client side for reloading the information.
+
 ### Layouts
 
 he key property: layouts don't re-mount on navigation. When a user clicks between pages, the layout stays alive and only the `{children}` slot swaps out.
