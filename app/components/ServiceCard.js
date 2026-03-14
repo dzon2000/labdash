@@ -29,7 +29,7 @@ export default function ServiceCard({ service }) {
               {/* Optional: Status indicator */}
               <div className="mt-4 flex items-center gap-2">
                   <div className={STATUS_STYLES[service.status]}></div>
-                <span className="text-xs text-gray-500">{service.status}</span>
+                <span className="text-xs text-gray-500">{service.message || service.status}</span>
               </div>
             </div>
     </Link>
