@@ -66,18 +66,18 @@ export default async function HomePage() {
     const initialServices = await getInitialStatuses();
 
     return (
-        <main className="flex-1 p-8">
-            {/* Header Section */}
-            <div className="mb-8">
-                <h1 className="text-4xl font-bold text-white mb-2">
-                    Destroyer Dashboard
-                </h1>
-                <p className="text-gray-400">
-                    Happily monitoring {services.length} services.
-                </p>
-            </div>
+      <main className="flex-1 p-8  dark:bg-gray-900 bg-gray-50">
+        {/* Header Section */}
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold  dark:text-white text-gray-900 mb-2">
+            Destroyer Dashboard
+          </h1>
+          <p className=" dark:text-gray-400 text-gray-600">
+            Happily monitoring {services.length} services.
+          </p>
+        </div>
 
-            <ServicesList initialServices={initialServices} />
-        </main>
+        <ServicesList initialServices={initialServices} />
+      </main>
     );
 }

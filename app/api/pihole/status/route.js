@@ -8,7 +8,10 @@ export async function GET() {
       }
     );
     if (!response.ok) {
-      return Response.json({ status: 'down' });
+        return Response.json({
+            status: 'down',
+            message: 'Unknown'
+        });
     }
     const data = await response.json();
     return Response.json({
